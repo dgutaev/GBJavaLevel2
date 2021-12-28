@@ -1,4 +1,5 @@
 package Lesson1;
+
 /*
 1. Создайте три класса Человек, Кот, Робот, которые не наследуются от одного класса. Эти классы должны уметь бегать и
 прыгать (методы просто выводят информацию о действии в консоль).
@@ -13,6 +14,44 @@ package Lesson1;
  */
 public class Main {
     public static void main(String[] args) {
+        Participants[] sportThings = {
+                new Human("Биба", 2, 2),
+                new Human("Боба", 1, 3),
+                new Cat("Компот", 4, 5),
+                new Cat("Коржик", 2, 1),
+                new Cat("Карамелька", 3, 14),
+                new Robot("Федор", 1, 11),
+                new Robot("Т800", 8, 13)
+        };
 
+        Events[] obstacles = {
+                new Track(2),
+                new Track(5),
+                new Track(6),
+                new Wall(2),
+                new Wall(3)
+        };
+
+        for (Participants sportThing : sportThings) {
+            System.out.println("К препятствию подходит " + sportThing);
+            boolean win = true;
+            for (Events obstacle : obstacles) {
+                System.out.println(sportThing + " пытается преодолеть " + obstacle);
+                if (obstacle.running(sportThing.getMaxLength()) || obstacle.jumping(sportThing.getMaxHeight())) {
+                    System.out.println("Преодолевает");
+                } else {
+                    System.out.println("Не преодолевает");
+                    win = false;
+                    break;
+                }
+            }
+
+            if (win) {
+                System.out.println(sportThing + " пришел к финишу");
+            } else {
+                System.out.println(sportThing + " сошел с дистанции");
+            }
+            System.out.println();
+        }
     }
 }
